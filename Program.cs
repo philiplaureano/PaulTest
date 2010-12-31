@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace PaulBenchmark
 {
@@ -9,7 +10,9 @@ namespace PaulBenchmark
 
 		private static void Main(string[] args)
 		{
+			// calling with 'c 100' will execute 100 iterations. adding 'm' will execute on many threads (using TPL Tasks)
 			var iterations = GetIterationsCount(args);
+			var multithreaded = GetIsMultithreaded(args);
 			IPaulTest[] tests = {
 			                    	new CustomContainer(),
 			                    	new Windsor(),
@@ -23,13 +26,46 @@ namespace PaulBenchmark
 			{
 				Run(paulTest, 1, false);
 			}
-
 			Console.WriteLine("Running {0} times...", iterations);
-			foreach (var paulTest in tests)
+			if(multithreaded)
 			{
-				Run(paulTest, iterations, true);
+				Console.WriteLine("...on multiple threads");
+				foreach (var paulTest in tests)
+				{
+					RunMultithreaded(paulTest, iterations);
+				}
+			}
+			else
+			{
+				foreach (var paulTest in tests)
+				{
+					Run(paulTest, iterations, true);
+				}
 			}
 
+		}
+
+		private static void RunMultithreaded(IPaulTest test, int count)
+		{
+			var stopwatch = Stopwatch.StartNew();
+			var tasks = new Task[count];
+			for (var i = 0; i < count; i++)
+			{
+				tasks[i] = Task.Factory.StartNew(() =>
+				                                 	{
+				                                 		var player = test.ResolvePlayer();
+				                                 		player.Shoot();
+				                                 	});
+			}
+			Task.WaitAll(tasks);
+			Console.WriteLine(" Hey {0} - you did it in {1}", test.GetType().Name, stopwatch.Elapsed);
+			
+		}
+
+		private static bool GetIsMultithreaded(string[] args)
+		{
+			var isMultithreaded = Array.IndexOf(args, "m") != -1;
+			return isMultithreaded;
 		}
 
 		private static void Run(IPaulTest test, int count, bool measure)
@@ -44,7 +80,7 @@ namespace PaulBenchmark
 				var player = test.ResolvePlayer();
 				player.Shoot();
 			}
-			if(stopwatch!=null)
+			if(stopwatch != null)
 			{
 				Console.WriteLine(" Hey {0} - you did it in {1}", test.GetType().Name, stopwatch.Elapsed);
 			}
@@ -54,7 +90,7 @@ namespace PaulBenchmark
 		{
 			var indexOfCount = Array.IndexOf(args, "c");
 
-			if (indexOfCount < 0 && indexOfCount == args.Length - 1)
+			if (indexOfCount < 0 || indexOfCount == args.Length - 1)
 			{
 				return defaultIterationsCount;
 			}
