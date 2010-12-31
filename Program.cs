@@ -15,7 +15,8 @@ namespace PaulBenchmark
 			                    	new Windsor(),
 			                    	new Autofac(),
 			                    	new Unity(),
-			                    	new Ninject()
+			                    	new Ninject(),
+			                    	new StructureMap()
 			                    };
 			// warmup
 			foreach (var paulTest in tests)
