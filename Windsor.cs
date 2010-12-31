@@ -1,7 +1,6 @@
 ﻿using System;
 using Castle.Facilities.TypedFactory;
 using Castle.MicroKernel.Registration;
-using Castle.MicroKernel.Releasers;
 using Castle.Windsor;
 
 namespace PaulBenchmark
@@ -12,10 +11,7 @@ namespace PaulBenchmark
 
 		public Windsor()
 		{
-			container = new WindsorContainer();
-			// since you're being a bad person and not releasing components anyway...
-			container.Kernel.ReleasePolicy = new NoTrackingReleasePolicy();
-			container
+			container = new WindsorContainer()
 				.AddFacility<TypedFactoryFacility>()
 				.Register(Component.For<Game>(),
 				          Component.For<Player>().LifeStyle.Transient,
