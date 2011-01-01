@@ -13,21 +13,17 @@ namespace PaulBenchmark
 			// calling with 'c 100' will execute 100 iterations. adding 'm' will execute on many threads (using TPL Tasks)
 			var iterations = GetIterationsCount(args);
 			var multithreaded = GetIsMultithreaded(args);
-			IPaulTest[] tests = {
-			                    	new CustomContainer(),
-			                    	new Windsor(),
-			                    	new Autofac(),
-			                    	new Unity(),
-			                    	new Ninject(),
-			                    	new StructureMap()
-			                    };
+			var tests = GetTestSubjects();
 			// warmup
 			foreach (var paulTest in tests)
 			{
 				Run(paulTest, 1, false);
 			}
+
+			//so that we don't reuse singletons from the warmup run
+			tests = GetTestSubjects();
 			Console.WriteLine("Running {0} times...", iterations);
-			if(multithreaded)
+			if (multithreaded)
 			{
 				Console.WriteLine("...on multiple threads");
 				foreach (var paulTest in tests)
@@ -42,7 +38,20 @@ namespace PaulBenchmark
 					Run(paulTest, iterations, true);
 				}
 			}
+		}
 
+		private static IPaulTest[] GetTestSubjects()
+		{
+			return new IPaulTest[]
+			       	{
+			       		new CustomContainer(),
+			       		new Windsor(),
+			       		new Windsor_delegates(),
+			       		new Autofac(),
+			       		new Autofac_delegates(),
+			       		new Unity(),
+			       		new StructureMap()
+			       	};
 		}
 
 		private static void RunMultithreaded(IPaulTest test, int count)
@@ -59,7 +68,6 @@ namespace PaulBenchmark
 			}
 			Task.WaitAll(tasks);
 			Console.WriteLine(" Hey {0} - you did it in {1}", test.GetType().Name, stopwatch.Elapsed);
-			
 		}
 
 		private static bool GetIsMultithreaded(string[] args)
@@ -71,7 +79,7 @@ namespace PaulBenchmark
 		private static void Run(IPaulTest test, int count, bool measure)
 		{
 			Stopwatch stopwatch = null;
-			if(measure)
+			if (measure)
 			{
 				stopwatch = Stopwatch.StartNew();
 			}
@@ -80,7 +88,7 @@ namespace PaulBenchmark
 				var player = test.ResolvePlayer();
 				player.Shoot();
 			}
-			if(stopwatch != null)
+			if (stopwatch != null)
 			{
 				Console.WriteLine(" Hey {0} - you did it in {1}", test.GetType().Name, stopwatch.Elapsed);
 			}

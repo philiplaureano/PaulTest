@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Autofac.cs" />
+    <Compile Include="Autofac_delegates.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="CustomContainer.cs" />
     <Compile Include="Game.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="TestNinject.cs" />
     <Compile Include="Unity.cs" />
     <Compile Include="Windsor.cs" />
+    <Compile Include="Windsor_delegates.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
