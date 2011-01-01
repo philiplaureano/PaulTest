@@ -30,15 +30,15 @@
         </member>
         <member name="T:Castle.MicroKernel.ComponentActivator.DefaultComponentActivator">
             <summary>
-            Standard implementation of <see cref="T:Castle.MicroKernel.IComponentActivator"/>.
-            Handles the selection of the best constructor, fills the
-            writable properties the component exposes, run the commission 
-            and decommission lifecycles, etc.
+              Standard implementation of <see cref="T:Castle.MicroKernel.IComponentActivator"/>.
+              Handles the selection of the best constructor, fills the
+              writable properties the component exposes, run the commission 
+              and decommission lifecycles, etc.
             </summary>
             <remarks>
-            Custom implementors can just override the <c>CreateInstance</c> method.
-            Please note however that the activator is responsible for the proxy creation
-            when needed.
+              Custom implementors can just override the <c>CreateInstance</c> method.
+              Please note however that the activator is responsible for the proxy creation
+              when needed.
             </remarks>
         </member>
         <member name="T:Castle.MicroKernel.ComponentActivator.AbstractComponentActivator">
@@ -479,10 +479,10 @@
         </member>
         <member name="M:Castle.Facilities.TypedFactory.DefaultTypedFactoryComponentSelector.BuildFactoryComponent(System.Reflection.MethodInfo,System.String,System.Type,System.Collections.IDictionary)">
             <summary>
-              Builds <see cref="T:Castle.Facilities.TypedFactory.TypedFactoryComponent"/> for given call.
+              Builds <see cref="T:Castle.Facilities.TypedFactory.TypedFactoryComponentResolver"/> for given call.
               By default if <paramref name="componentType"/> is a collection
-              returns <see cref="T:Castle.Facilities.TypedFactory.TypedFactoryComponentCollection"/> for the collection's item type,
-              otherwise standard <see cref="T:Castle.Facilities.TypedFactory.TypedFactoryComponent"/>.
+              returns <see cref="T:Castle.Facilities.TypedFactory.TypedFactoryCollectionResolver"/> for the collection's item type,
+              otherwise standard <see cref="T:Castle.Facilities.TypedFactory.TypedFactoryComponentResolver"/>.
             </summary>
             <param name="method"></param>
             <param name="componentName"></param>
@@ -581,7 +581,7 @@
         </member>
         <member name="T:Castle.MicroKernel.Handlers.DefaultHandler">
             <summary>
-            Summary description for DefaultHandler.
+              Summary description for DefaultHandler.
             </summary>
         </member>
         <member name="T:Castle.MicroKernel.Handlers.AbstractHandler">
@@ -880,26 +880,27 @@
         </member>
         <member name="M:Castle.MicroKernel.Handlers.DefaultHandler.#ctor(Castle.Core.ComponentModel)">
             <summary>
-            Initializes a new instance of the <see cref="T:Castle.MicroKernel.Handlers.DefaultHandler"/> class.
+              Initializes a new instance of the <see cref="T:Castle.MicroKernel.Handlers.DefaultHandler"/> class.
             </summary>
             <param name="model"></param>
         </member>
-        <member name="M:Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(Castle.MicroKernel.Context.CreationContext,System.Boolean,System.Boolean)">
-            <summary>
-            Returns an instance of the component this handler
-            is responsible for
-            </summary>
-            <param name="context"></param>
-            <param name="requiresDecommission"></param>
-            <param name="instanceRequired"></param>
-            <returns></returns>
-        </member>
         <member name="M:Castle.MicroKernel.Handlers.DefaultHandler.ReleaseCore(Castle.MicroKernel.Burden)">
             <summary>
-            disposes the component instance (or recycle it)
+              disposes the component instance (or recycle it)
             </summary>
-            <param name="burden"></param>
+            <param name = "burden"></param>
             <returns>true if destroyed</returns>
+        </member>
+        <member name="M:Castle.MicroKernel.Handlers.DefaultHandler.ResolveCore(Castle.MicroKernel.Context.CreationContext,System.Boolean,System.Boolean,Castle.MicroKernel.Burden@)">
+            <summary>
+              Returns an instance of the component this handler
+              is responsible for
+            </summary>
+            <param name = "context"></param>
+            <param name = "requiresDecommission"></param>
+            <param name = "instanceRequired"></param>
+            <param name="burden"></param>
+            <returns></returns>
         </member>
         <member name="T:Castle.MicroKernel.Context.CreationContext">
             <summary>
@@ -1465,6 +1466,16 @@
             </summary>
             <param name="model"></param>
         </member>
+        <member name="M:Castle.MicroKernel.IKernelInternal.Resolve(System.String,System.Type,System.Collections.IDictionary,Castle.MicroKernel.IReleasePolicy)">
+            <summary>
+              Returns a component instance by the key
+            </summary>
+            <param name="key"></param>
+            <param name="service"></param>
+            <param name="arguments"></param>
+            <param name="policy"></param>
+            <returns></returns>
+        </member>
         <member name="F:Castle.MicroKernel.DefaultKernel.childKernels">
             <summary>
               List of sub containers.
@@ -1626,6 +1637,16 @@
             <param name="key"></param>
             <param name="service"></param>
             <param name="arguments"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Castle.MicroKernel.DefaultKernel.Castle#MicroKernel#IKernelInternal#Resolve(System.String,System.Type,System.Collections.IDictionary,Castle.MicroKernel.IReleasePolicy)">
+            <summary>
+              Returns a component instance by the key
+            </summary>
+            <param name="key"></param>
+            <param name="service"></param>
+            <param name="arguments"></param>
+            <param name="policy"></param>
             <returns></returns>
         </member>
         <member name="M:Castle.MicroKernel.DefaultKernel.Resolve``1(System.Collections.IDictionary)">
@@ -2385,26 +2406,27 @@
             interceptor is acting.
             </summary>
         </member>
-        <member name="T:Castle.Facilities.TypedFactory.TypedFactoryComponent">
+        <member name="T:Castle.Facilities.TypedFactory.TypedFactoryComponentResolver">
             <summary>
               Represents a single component to be resolved via Typed Factory
             </summary>
         </member>
-        <member name="M:Castle.Facilities.TypedFactory.TypedFactoryComponent.Resolve(Castle.MicroKernel.IKernel)">
+        <member name="M:Castle.Facilities.TypedFactory.TypedFactoryComponentResolver.Resolve(Castle.MicroKernel.IKernelInternal,Castle.MicroKernel.IReleasePolicy)">
             <summary>
               Resolves the component(s) from given kernel.
             </summary>
             <param name = "kernel"></param>
+            <param name = "scope"></param>
             <returns>Resolved component(s).</returns>
         </member>
-        <member name="T:Castle.Facilities.TypedFactory.TypedFactoryComponentCollection">
+        <member name="T:Castle.Facilities.TypedFactory.TypedFactoryCollectionResolver">
             <summary>
               Represents a set of components to be resolved via Typed Factory. Uses <see cref="M:Castle.MicroKernel.IKernel.ResolveAll(System.Type,System.Collections.IDictionary)"/> to resolve the components.
             </summary>
         </member>
-        <member name="M:Castle.Facilities.TypedFactory.TypedFactoryComponentCollection.#ctor(System.Type,System.Collections.IDictionary)">
+        <member name="M:Castle.Facilities.TypedFactory.TypedFactoryCollectionResolver.#ctor(System.Type,System.Collections.IDictionary)">
             <summary>
-              Creates new instance of <see cref="T:Castle.Facilities.TypedFactory.TypedFactoryComponentCollection"/>.
+              Creates new instance of <see cref="T:Castle.Facilities.TypedFactory.TypedFactoryCollectionResolver"/>.
             </summary>
             <param name="componentCollectionType">Collection type to resolve. Must be an array (SomeComponent[]) or IEnumerable{SomeComponent}. Type of the element of the collection will be used as first argument to <see cref="M:Castle.MicroKernel.IKernel.ResolveAll(System.Type,System.Collections.IDictionary)"/></param>
             <param name="additionalArguments">Additional arguents that will be passed as second argument to <see cref="M:Castle.MicroKernel.IKernel.ResolveAll(System.Type,System.Collections.IDictionary)"/></param>
@@ -5240,14 +5262,14 @@
         </member>
         <member name="T:Castle.MicroKernel.Releasers.NoTrackingReleasePolicy">
             <summary>
-            No tracking of component instances are made.
+              No tracking of component instances are made.
             </summary>
         </member>
         <member name="T:Castle.MicroKernel.Resolvers.DefaultDependencyResolver">
             <summary>
-            Default implementation for <see cref="T:Castle.MicroKernel.IDependencyResolver"/>.
-            This implementation is quite simple, but still should be useful
-            for 99% of situations. 
+              Default implementation for <see cref="T:Castle.MicroKernel.IDependencyResolver"/>.
+              This implementation is quite simple, but still should be useful
+              for 99% of situations.
             </summary>
         </member>
         <member name="T:Castle.MicroKernel.IDependencyResolver">
@@ -5277,18 +5299,18 @@
             </summary>
             <param name="subResolver">The subresolver instance</param>
         </member>
-        <member name="M:Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Initialize(Castle.MicroKernel.IKernel,Castle.MicroKernel.DependencyDelegate)">
-            <summary>
-              Initializes this instance with the specified dependency delegate.
-            </summary>
-            <param name="kernel">kernel</param>
-            <param name = "dependencyDelegate">The dependency delegate.</param>
-        </member>
         <member name="M:Castle.MicroKernel.Resolvers.DefaultDependencyResolver.AddSubResolver(Castle.MicroKernel.ISubDependencyResolver)">
             <summary>
               Registers a sub resolver instance
             </summary>
             <param name = "subResolver">The subresolver instance</param>
+        </member>
+        <member name="M:Castle.MicroKernel.Resolvers.DefaultDependencyResolver.Initialize(Castle.MicroKernel.IKernel,Castle.MicroKernel.DependencyDelegate)">
+            <summary>
+              Initializes this instance with the specified dependency delegate.
+            </summary>
+            <param name = "kernel">kernel</param>
+            <param name = "dependencyDelegate">The dependency delegate.</param>
         </member>
         <member name="M:Castle.MicroKernel.Resolvers.DefaultDependencyResolver.RemoveSubResolver(Castle.MicroKernel.ISubDependencyResolver)">
             <summary>
