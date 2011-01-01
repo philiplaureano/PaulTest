@@ -44,6 +44,9 @@
     <Reference Include="Castle.Windsor">
       <HintPath>lib\windsor\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="Funq">
+      <HintPath>lib\funq\Funq.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>lib\unity\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
@@ -78,6 +81,7 @@
     <Compile Include="Autofac_delegates.cs" />
     <Compile Include="Bullet.cs" />
     <Compile Include="CustomContainer.cs" />
+    <Compile Include="Funq.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Gun.cs" />
     <Compile Include="IPaulTest.cs" />
