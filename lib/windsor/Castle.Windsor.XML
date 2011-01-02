@@ -934,7 +934,7 @@
             <param name="releasePolicy">The release policy.</param>
             <param name="requestedType">The type to extract generic arguments.</param>
             <param name="additionalArguments">The additional arguments.</param>
-            <param name="conversionManager">The conversion manager.</param>
+            <param name="converter">The conversion manager.</param>
             <param name="parent">Parent context</param>
         </member>
         <member name="M:Castle.MicroKernel.Context.CreationContext.#ctor">
@@ -3010,6 +3010,11 @@
               All available constructors
             </summary>
         </member>
+        <member name="F:Castle.Core.ComponentModel.lifecycle">
+            <summary>
+              Steps of lifecycle
+            </summary>
+        </member>
         <member name="F:Castle.Core.ComponentModel.customDependencies">
             <summary>
               /// Custom dependencies///
@@ -3020,7 +3025,7 @@
               Dependencies the kernel must resolve
             </summary>
         </member>
-        <member name="F:Castle.Core.ComponentModel.extended">
+        <member name="F:Castle.Core.ComponentModel.extendedProperties">
             <summary>
               Extended properties
             </summary>
@@ -3028,11 +3033,6 @@
         <member name="F:Castle.Core.ComponentModel.interceptors">
             <summary>
               Interceptors associated
-            </summary>
-        </member>
-        <member name="F:Castle.Core.ComponentModel.lifecycle">
-            <summary>
-              Steps of lifecycle
             </summary>
         </member>
         <member name="F:Castle.Core.ComponentModel.parameters">
@@ -3045,7 +3045,7 @@
               All potential properties that can be setted by the kernel
             </summary>
         </member>
-        <member name="M:Castle.Core.ComponentModel.#ctor(System.String,System.Collections.Generic.ICollection{System.Type},System.Type)">
+        <member name="M:Castle.Core.ComponentModel.#ctor(System.String,System.Collections.Generic.ICollection{System.Type},System.Type,System.Collections.IDictionary)">
             <summary>
               Constructs a ComponentModel
             </summary>
