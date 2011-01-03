@@ -87,7 +87,8 @@ namespace PaulBenchmark
 			       		new Unity(),
 			       		new StructureMap(),
 			       		new Linfu(),
-			       		new Funq()
+			       		new Funq(),
+			       		new Ninject()
 			       	};
 		}
 
