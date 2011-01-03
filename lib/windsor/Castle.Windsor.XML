@@ -5257,8 +5257,16 @@
         </member>
         <member name="T:Castle.MicroKernel.IReleasePolicy">
             <summary>
-            Policy managing lifetime of components, and in particular their release process.
+              Policy managing lifetime of components, and in particular their release process.
             </summary>
+        </member>
+        <member name="M:Castle.MicroKernel.IReleasePolicy.Track(System.Object,Castle.MicroKernel.Burden)">
+            <summary>
+              Asks the policy to track given object. The object will be released when a call to <see cref="M:Castle.MicroKernel.IReleasePolicy.Release(System.Object)"/> is made.
+            </summary>
+            <param name="instance"></param>
+            <param name="burden"></param>
+            <exception cref="T:System.ArgumentException">Thrown when <paramref name="burden"/> does NOT have its <see cref="P:Castle.MicroKernel.Burden.RequiresPolicyRelease"/> flag set.</exception>
         </member>
         <member name="T:Castle.MicroKernel.Releasers.NoTrackingReleasePolicy">
             <summary>

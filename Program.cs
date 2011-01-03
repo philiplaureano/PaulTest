@@ -54,16 +54,16 @@ namespace PaulBenchmark
 			var stopwatch = Stopwatch.StartNew();
 			var threads = new Thread[Environment.ProcessorCount];
 			var interval = count/threads.Length;
-			for (int i = 0; i < threads.Length; i++)
+			for (var i = 0; i < threads.Length; i++)
 			{
 				var thread = new Thread(() =>
-				{
-					for (int j = 0; j < interval; j++)
-					{
-						var player = test.ResolvePlayer();
-						player.Shoot();
-					}
-				});
+				                        	{
+				                        		for (var j = 0; j < interval; j++)
+				                        		{
+				                        			var player = test.ResolvePlayer();
+				                        			player.Shoot();
+				                        		}
+				                        	});
 				thread.Name = test.GetType().Name + " " + (i + 1);
 				threads[i] = thread;
 				thread.Start();
@@ -86,6 +86,7 @@ namespace PaulBenchmark
 			       		new Autofac_delegates(),
 			       		new Unity(),
 			       		new StructureMap(),
+			       		new Linfu(),
 			       		new Funq()
 			       	};
 		}
