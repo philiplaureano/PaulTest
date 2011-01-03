@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,7 +14,8 @@ namespace PaulBenchmark
 		{
 			// calling with 'c 100' will execute 100 iterations. adding 'm' will execute on many threads (using TPL Tasks)
 			var iterations = GetIterationsCount(args);
-			var multithreaded = ReadMode(args);
+			var mode = ReadMode(args);
+			var filter = ReadFilters(args);
 			var tests = GetTestSubjects();
 			// warmup
 			foreach (var paulTest in tests)
@@ -24,29 +26,57 @@ namespace PaulBenchmark
 			//so that we don't reuse singletons from the warmup run
 			tests = GetTestSubjects();
 			Console.WriteLine("Running {0} times...", iterations);
-			switch (multithreaded)
+			switch (mode)
 			{
 				case Mode.Thread_based:
 					Console.WriteLine("...on multiple threads (using TPL Tasks)");
 					foreach (var paulTest in tests)
 					{
-						RunTaskBased(paulTest, iterations);
+						if(ShouldRun(filter, paulTest))
+						{
+							RunTaskBased(paulTest, iterations);
+						}
 					}
 					break;
 				case Mode.Task_based:
 					Console.WriteLine("...on multiple threads (using {0} Threads)", Environment.ProcessorCount);
 					foreach (var paulTest in tests)
 					{
-						RunThreadBased(paulTest, iterations);
+						if (ShouldRun(filter, paulTest))
+						{
+							RunThreadBased(paulTest, iterations);
+						}
 					}
 					break;
 				default:
 					foreach (var paulTest in tests)
 					{
-						Run(paulTest, iterations, true);
+						if (ShouldRun(filter, paulTest))
+						{
+							Run(paulTest, iterations, true);
+						}
 					}
 					break;
 			}
+		}
+
+		private static bool ShouldRun(Regex filter, IPaulTest paulTest)
+		{
+			if (filter == null) return false;
+			var name = paulTest.GetType().Name;
+			var shouldRun = filter.IsMatch(name);
+			return shouldRun;
+		}
+
+		private static Regex ReadFilters(string[] args)
+		{
+			var indexOfFilter = Array.IndexOf(args, "f");
+
+			if (indexOfFilter < 0 || indexOfFilter == args.Length - 1)
+			{
+				return null;
+			}
+			return new Regex(args[indexOfFilter + 1], RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace);
 		}
 
 		private static void RunThreadBased(IPaulTest test, int count)
@@ -63,8 +93,7 @@ namespace PaulBenchmark
 				                        			var player = test.ResolvePlayer();
 				                        			player.Shoot();
 				                        		}
-				                        	});
-				thread.Name = test.GetType().Name + " " + (i + 1);
+				                        	}) {Name = test.GetType().Name + " " + (i + 1)};
 				threads[i] = thread;
 				thread.Start();
 			}
