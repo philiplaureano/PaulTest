@@ -295,9 +295,9 @@
         </member>
         <member name="T:Castle.Core.Internal.LateBoundComponent">
             <summary>
-            Marker class used to denote components that have late bound type
-            That is the actual type is not known exactly at the time when <see cref="T:Castle.Core.ComponentModel"/>
-            is created. Those are for example components instantiated via abstract factory.
+              Marker class used to denote components that have late bound type
+              That is the actual type is not known exactly at the time when <see cref="T:Castle.Core.ComponentModel"/>
+              is created. Those are for example components instantiated via abstract factory.
             </summary>
         </member>
         <member name="M:Castle.Core.Internal.ReflectionUtil.GetCompatibleArrayItemType(System.Type)">
@@ -2640,7 +2640,7 @@
         </member>
         <member name="T:Castle.MicroKernel.LifecycleConcerns.LateBoundConcerns">
             <summary>
-            Lifetime concern that works for components that don't have their actual type determined upfront
+              Lifetime concern that works for components that don't have their actual type determined upfront
             </summary>
         </member>
         <member name="T:Castle.MicroKernel.LifecycleConcerns.SupportInitializeConcern">
@@ -3382,35 +3382,35 @@
         </member>
         <member name="T:Castle.Core.LifecycleConcernsCollection">
             <summary>
-            Represents a collection of ordered lifecycle concerns.
+              Represents a collection of ordered lifecycle concerns.
             </summary>
         </member>
         <member name="P:Castle.Core.LifecycleConcernsCollection.CommissionConcerns">
             <summary>
-            Returns all concerns for the commission phase
+              Returns all concerns for the commission phase
             </summary>
             <value></value>
         </member>
         <member name="P:Castle.Core.LifecycleConcernsCollection.DecommissionConcerns">
             <summary>
-            Returns all concerns for the decommission phase
+              Returns all concerns for the decommission phase
             </summary>
             <value></value>
         </member>
         <member name="P:Castle.Core.LifecycleConcernsCollection.HasCommissionConcerns">
             <summary>
-            Gets a value indicating whether this instance has commission steps.
+              Gets a value indicating whether this instance has commission steps.
             </summary>
             <value>
-            	<c>true</c> if this instance has commission steps; otherwise, <c>false</c>.
+              <c>true</c> if this instance has commission steps; otherwise, <c>false</c>.
             </value>
         </member>
         <member name="P:Castle.Core.LifecycleConcernsCollection.HasDecommissionConcerns">
             <summary>
-            Gets a value indicating whether this instance has decommission steps.
+              Gets a value indicating whether this instance has decommission steps.
             </summary>
             <value>
-            	<c>true</c> if this instance has decommission steps; otherwise, <c>false</c>.
+              <c>true</c> if this instance has decommission steps; otherwise, <c>false</c>.
             </value>
         </member>
         <member name="T:Castle.Core.MethodMetaModel">
@@ -5252,7 +5252,7 @@
         </member>
         <member name="T:Castle.MicroKernel.Releasers.LifecycledComponentsReleasePolicy">
             <summary>
-              Tracks all components if asked. Releases those requiring decomission (<see cref="P:Castle.MicroKernel.Burden.RequiresPolicyRelease"/>)
+              Tracks all components requiring decomission (<see cref="P:Castle.MicroKernel.Burden.RequiresPolicyRelease"/>)
             </summary>
         </member>
         <member name="T:Castle.MicroKernel.IReleasePolicy">

@@ -62,7 +62,7 @@ namespace PaulBenchmark
 
 		private static bool ShouldRun(Regex filter, IPaulTest paulTest)
 		{
-			if (filter == null) return false;
+			if (filter == null) return true;
 			var name = paulTest.GetType().Name;
 			var shouldRun = filter.IsMatch(name);
 			return shouldRun;
