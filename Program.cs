@@ -3,17 +3,15 @@ using System.IO;
 
 namespace PaulBenchmark
 {
-	internal class Program
-	{
-		private static void Main(string[] args)
-		{
+    internal class Program
+    {
+        private static void Main(string[] args)
+        {
 #if DEBUG
-			args = new[]
-					{
+            args = new[]
+					{   "t",
 						"c",
-						"10000",
-						"f",
-						"windsor",
+						"50000",
 						"r"
 					};
 #else
@@ -23,18 +21,18 @@ namespace PaulBenchmark
 				return;
 			}
 #endif
-			using(var benchmark = new BenchmarkFactory(args).Create())
-			{
-				benchmark.Run();
-			}
-		}
+            using (var benchmark = new BenchmarkFactory(args).Create())
+            {
+                benchmark.Run();
+            }
+        }
 
-		private static void ShowHelp()
-		{
-			using(var reader = new StreamReader(typeof (Program).Assembly.GetManifestResourceStream("PaulBenchmark.help.txt")))
-			{
-				Console.WriteLine(reader.ReadToEnd());
-			}
-		}
-	}
+        private static void ShowHelp()
+        {
+            using (var reader = new StreamReader(typeof(Program).Assembly.GetManifestResourceStream("PaulBenchmark.help.txt")))
+            {
+                Console.WriteLine(reader.ReadToEnd());
+            }
+        }
+    }
 }

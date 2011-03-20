@@ -15,6 +15,7 @@ namespace PaulBenchmark
 			return new IPaulTest[]
 			       	{
 			       		new CustomContainer(),
+                        new Hiro(),
 			       		new Windsor(),
 			       		new Windsor_delegates(),
 			       		new Autofac(),
@@ -23,8 +24,7 @@ namespace PaulBenchmark
 			       		new StructureMap(),
 			       		new Linfu(),
 			       		new Funq(),
-			       		new Ninject(),
-			       		new Hiro()
+			       		new Ninject(),			       		
 			       	};
 		}
 
@@ -32,6 +32,8 @@ namespace PaulBenchmark
 		{
 			Warmup();
 			Go();
+
+		    return;
 		}
 
 		protected abstract void Go();

@@ -16,6 +16,10 @@ namespace PaulBenchmark
 			container.AddService(typeof(Gun), LifecycleType.OncePerRequest);
 			container.AddService(typeof(Bullet), LifecycleType.OncePerRequest);
 			container.AddService<Func<Bullet>>(r => () => r.Container.GetService<Bullet>(), LifecycleType.OncePerRequest);
+
+		    container.DisableAutoFieldInjection();
+            container.DisableAutoMethodInjection();
+		    container.DisableAutoPropertyInjection();
 		}
 
 		public Player ResolvePlayer()

@@ -16,7 +16,7 @@
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -47,7 +47,7 @@
     <Reference Include="Funq">
       <HintPath>lib\funq\Funq.dll</HintPath>
     </Reference>
-    <Reference Include="Hiro, Version=0.1.0.28549, Culture=neutral, PublicKeyToken=f0efb83db47c0105, processorArchitecture=MSIL">
+    <Reference Include="Hiro, Version=0.1.0.26350, Culture=neutral, PublicKeyToken=f0efb83db47c0105, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\hiro\Hiro.dll</HintPath>
     </Reference>
