@@ -1,0 +1,32 @@
+﻿You didn't specify any commands. The following commands are available:
+
+profiling mode:
+	p <STEP>- memory profiling. In this mode results form and performance run mode options are not available. Optional parameter step will pause execution every specified number of iterations so that memory snapshot can be taken.
+
+performance run mode:
+	m - task based (using TPL tasks)
+	t - threader based (using Thread class.
+		As many threads as there are logical processors on your computer will be used.
+	- single-threader (default) - used when none of the above is specified.
+
+results form:
+	r - rate per second (number of operations per second)
+	- total time (default) - time it takes to execute specified number of iterations
+
+iterations count:
+	c <VALUE> - <VALUE> has to be a positive integer which specifies how many iterations are ran.
+				when not specified the default value of 100,000 will be used
+
+filter:
+	f <REGEX> - <REGEX> is the regular expression matching names of tests you want to run.
+				when not specified all tests are ran
+
+output file:
+	o <PATH> - <PATH> is the path to the csv file where results of the benchmark are to be saved.
+				when not specified results are only outputted to the console
+
+example:
+
+to run the program with 1,000,000 iterations in multi-threaded mode testing just Windsor and Autofac and saving results to file called "c:\windsor.csv" use the following:
+
+> PaulBenchmark.exe t c 1000000 f "windsor|autofac" o "c:\windsor.csv"
