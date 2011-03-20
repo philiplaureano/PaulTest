@@ -23,7 +23,8 @@ namespace PaulBenchmark
 			       		new StructureMap(),
 			       		new Linfu(),
 			       		new Funq(),
-			       		new Ninject()
+			       		new Ninject(),
+			       		new Hiro()
 			       	};
 		}
 

@@ -47,8 +47,17 @@
     <Reference Include="Funq">
       <HintPath>lib\funq\Funq.dll</HintPath>
     </Reference>
+    <Reference Include="Hiro">
+      <HintPath>lib\hiro\Hiro.dll</HintPath>
+    </Reference>
+    <Reference Include="Hiro.Containers">
+      <HintPath>lib\hiro\Hiro.Containers.dll</HintPath>
+    </Reference>
     <Reference Include="LinFu.Core">
       <HintPath>lib\linfu\LinFu.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="LinFu.Finders">
+      <HintPath>lib\hiro\LinFu.Finders.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>lib\unity\Microsoft.Practices.ServiceLocation.dll</HintPath>
@@ -84,6 +93,7 @@
     <Compile Include="Autofac_delegates.cs" />
     <Compile Include="BenchmarkEngine.cs" />
     <Compile Include="BenchmarkFactory.cs" />
+    <Compile Include="HiroTests.cs" />
     <Compile Include="MemoryBenchmarkEngine.cs" />
     <Compile Include="PerformanceBenchmarkEngine.cs" />
     <Compile Include="Bullet.cs" />
