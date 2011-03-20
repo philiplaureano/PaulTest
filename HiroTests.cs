@@ -15,16 +15,14 @@ namespace PaulBenchmark
 			map.AddService<Player, Player>();
 			map.AddService<Gun, Gun>();
 			map.AddService<Bullet, Bullet>();
-			// no way to map func
-
+			map.AddService<Func<Bullet>>(k => () => k.GetInstance<Bullet>());
 			container = map.CreateContainer();
 		}
 
 
 		public Player ResolvePlayer()
 		{
-			throw new NotSupportedException("No way to have the Func<Bullet> provided");
-			//return container.GetInstance<Player>();
+			return container.GetInstance<Player>();
 		}
 	}
 

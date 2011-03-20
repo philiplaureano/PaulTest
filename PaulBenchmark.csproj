@@ -47,17 +47,24 @@
     <Reference Include="Funq">
       <HintPath>lib\funq\Funq.dll</HintPath>
     </Reference>
-    <Reference Include="Hiro">
+    <Reference Include="Hiro, Version=0.1.0.28549, Culture=neutral, PublicKeyToken=f0efb83db47c0105, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\hiro\Hiro.dll</HintPath>
     </Reference>
-    <Reference Include="Hiro.Containers">
+    <Reference Include="Hiro.Containers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0efb83db47c0105, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>lib\hiro\Hiro.Containers.dll</HintPath>
+    </Reference>
+    <Reference Include="Hiro.MSBuild.Tasks, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\hiro\Hiro.MSBuild.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Hiro.Web, Version=1.0.4095.28550, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\hiro\Hiro.Web.dll</HintPath>
     </Reference>
     <Reference Include="LinFu.Core">
       <HintPath>lib\linfu\LinFu.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="LinFu.Finders">
-      <HintPath>lib\hiro\LinFu.Finders.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation">
       <HintPath>lib\unity\Microsoft.Practices.ServiceLocation.dll</HintPath>

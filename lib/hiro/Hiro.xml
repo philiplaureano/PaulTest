@@ -148,6 +148,135 @@
       <param name="dependencyContainer">The <see cref="T:Hiro.Interfaces.IDependencyContainer" /> instance that contains the services that will be instantiated by compiled container.</param>
       <returns>An assembly containing the compiled IOC container.</returns>
     </member>
+    <member name="T:Hiro.Interfaces.IImplementation">
+      <summary>
+            Represents a service implementation that can be emitted in IL.
+            </summary>
+    </member>
+    <member name="M:Hiro.Interfaces.IImplementation.GetMissingDependencies(Hiro.Interfaces.IDependencyContainer)">
+      <summary>
+            Gets the list of missing dependencies from the current implementation.
+            </summary>
+      <param name="map">The implementation map.</param>
+      <returns>A list of missing dependencies.</returns>
+    </member>
+    <member name="M:Hiro.Interfaces.IImplementation.GetRequiredDependencies(Hiro.Interfaces.IDependencyContainer)">
+      <summary>
+            Returns the dependencies required by the current implementation.
+            </summary>
+      <param name="map">The implementation map.</param>
+      <returns>The list of required dependencies required by the current implementation.</returns>
+    </member>
+    <member name="M:Hiro.Interfaces.IImplementation.Emit(Hiro.Containers.IDependency,System.Collections.Generic.IDictionary{Hiro.Containers.IDependency,Hiro.Interfaces.IImplementation},Mono.Cecil.MethodDefinition)">
+      <summary>
+            Emits the instructions that will instantiate the current implementation.
+            </summary>
+      <param name="dependency">The dependency that describes the service to be instantiated.</param>
+      <param name="serviceMap">The service map that contains the list of dependencies in the application.</param>
+      <param name="targetMethod">The target method.</param>
+    </member>
+    <member name="T:Hiro.Functors.Core.FunctorCall">
+      <summary>
+            Represents a service implementation that uses a functor to instantiate the service itself.
+            </summary>
+    </member>
+    <member name="M:Hiro.Functors.Core.FunctorCall.#ctor(System.Func{Hiro.Containers.IMicroContainer,System.Object})">
+      <summary>
+            Initializes a new instance of the <see cref="T:Hiro.Functors.Core.FunctorCall" /> class.
+            </summary>
+      <param name="functor">The functor that will be used to instantiate the given service instance.</param>
+    </member>
+    <member name="M:Hiro.Functors.Core.FunctorCall.Emit(Hiro.Containers.IDependency,System.Collections.Generic.IDictionary{Hiro.Containers.IDependency,Hiro.Interfaces.IImplementation},Mono.Cecil.MethodDefinition)">
+      <summary>
+            Emits the instructions that will instantiate the current implementation using the given factory functor.
+            </summary>
+      <param name="dependency">The dependency that describes the service to be instantiated.</param>
+      <param name="serviceMap">The service map that contains the list of dependencies in the application.</param>
+      <param name="targetMethod">The target method.</param>
+    </member>
+    <member name="M:Hiro.Functors.Core.FunctorCall.GetMissingDependencies(Hiro.Interfaces.IDependencyContainer)">
+      <summary>
+            Gets the list of missing dependencies from the current implementation.
+            </summary>
+      <param name="map">The implementation map.</param>
+      <returns>A list of missing dependencies.</returns>
+    </member>
+    <member name="M:Hiro.Functors.Core.FunctorCall.GetRequiredDependencies(Hiro.Interfaces.IDependencyContainer)">
+      <summary>
+            Returns the dependencies required by the current implementation.
+            </summary>
+      <returns>The list of required dependencies required by the current implementation.</returns>
+    </member>
+    <member name="T:Hiro.FunctorExtensions">
+      <summary>
+            Represents a class that adds functor factory support to any given <see cref="T:Hiro.Interfaces.IDependencyMap" /> instance.
+            </summary>
+    </member>
+    <member name="M:Hiro.FunctorExtensions.AddService``1(Hiro.Interfaces.IDependencyMap,System.Func{Hiro.Containers.IMicroContainer,``0})">
+      <summary>
+            Adds a service implementation to the dependency map that uses the given <paramref name="factoryFunctor" />
+            to instantiate the service itself.
+            </summary>
+      <typeparam name="T">The service type.</typeparam>
+      <param name="map">The dependency map.</param>
+      <param name="factoryFunctor">The factory functor that will be used to instantiate the service type.</param>
+    </member>
+    <member name="M:Hiro.FunctorExtensions.AddService``1(Hiro.Interfaces.IDependencyMap,System.String,System.Func{Hiro.Containers.IMicroContainer,``0})">
+      <summary>
+            Adds a service implementation to the dependency map that uses the given <paramref name="factoryFunctor" />
+            to instantiate the service itself.
+            </summary>
+      <typeparam name="T">The service type.</typeparam>
+      <param name="map">The dependency map.</param>
+      <param name="serviceName">The service name.</param>
+      <param name="factoryFunctor">The factory functor that will be used to instantiate the service type.</param>
+    </member>
+    <member name="M:Hiro.FunctorExtensions.AddService(Hiro.Interfaces.IDependencyMap,System.String,System.Type,System.Func{Hiro.Containers.IMicroContainer,System.Object})">
+      <summary>
+            Adds a service implementation to the dependency map that uses the given <paramref name="factoryFunctor" />
+            to instantiate the service itself.
+            </summary>
+      <param name="map">The dependency map.</param>
+      <param name="serviceName">The service name.</param>
+      <param name="serviceType">The service type.</param>
+      <param name="factoryFunctor">The factory functor that will be used to instantiate the service type.</param>
+    </member>
+    <member name="M:Hiro.FunctorExtensions.AddService(Hiro.Interfaces.IDependencyMap,System.Type,System.Func{Hiro.Containers.IMicroContainer,System.Object})">
+      <summary>
+            Adds a service implementation to the dependency map that uses the given <paramref name="factoryFunctor" />
+            to instantiate the service itself.
+            </summary>
+      <param name="map">The dependency map.</param>
+      <param name="serviceType">The service type.</param>
+      <param name="factoryFunctor">The factory functor that will be used to instantiate the service type.</param>
+    </member>
+    <member name="T:Hiro.Functors.Core.FunctorRegistry">
+      <summary>
+            Represents a utility class that stores factory functor instances.
+            </summary>
+    </member>
+    <member name="M:Hiro.Functors.Core.FunctorRegistry.AddFunctor(System.String,System.Func{Hiro.Containers.IMicroContainer,System.Object})">
+      <summary>
+            Adds a functor to the registry.
+            </summary>
+      <param name="key">The key that uniquely identifies the functor.</param>
+      <param name="functor">The functor instance.</param>
+    </member>
+    <member name="M:Hiro.Functors.Core.FunctorRegistry.GetFunctor(System.String)">
+      <summary>
+            Gets the functor associated with the given functor <paramref name="key" />.
+            </summary>
+      <param name="key">The unique functor id.</param>
+      <returns>A functor that is associated with the given key.</returns>
+    </member>
+    <member name="M:Hiro.Functors.Core.FunctorRegistry.CreateInstance(System.String,Hiro.Containers.IMicroContainer)">
+      <summary>
+            Creates the instance with the given <paramref name="container" /> and functor <paramref name="key" />.
+            </summary>
+      <param name="key">The unique functor id.</param>
+      <param name="container">The host container.</param>
+      <returns>A new object instance.</returns>
+    </member>
     <member name="T:Hiro.ILProcessorExtensions">
       <summary>
             A class that extends the <see cref="T:Mono.Cecil.Cil.ILProcessor" /> class
@@ -429,33 +558,6 @@
       <param name="jumpTargetField">The field that holds the dictionary with the switch table target instructions.</param>
       <param name="getServiceHash">The method that calculates the service hash code.</param>
       <param name="il">The <see cref="T:Mono.Cecil.Cil.ILProcessor" /> that points to the body of the factory method.</param>
-    </member>
-    <member name="T:Hiro.Interfaces.IImplementation">
-      <summary>
-            Represents a service implementation that can be emitted in IL.
-            </summary>
-    </member>
-    <member name="M:Hiro.Interfaces.IImplementation.GetMissingDependencies(Hiro.Interfaces.IDependencyContainer)">
-      <summary>
-            Gets the list of missing dependencies from the current implementation.
-            </summary>
-      <param name="map">The implementation map.</param>
-      <returns>A list of missing dependencies.</returns>
-    </member>
-    <member name="M:Hiro.Interfaces.IImplementation.GetRequiredDependencies(Hiro.Interfaces.IDependencyContainer)">
-      <summary>
-            Returns the dependencies required by the current implementation.
-            </summary>
-      <param name="map">The implementation map.</param>
-      <returns>The list of required dependencies required by the current implementation.</returns>
-    </member>
-    <member name="M:Hiro.Interfaces.IImplementation.Emit(Hiro.Containers.IDependency,System.Collections.Generic.IDictionary{Hiro.Containers.IDependency,Hiro.Interfaces.IImplementation},Mono.Cecil.MethodDefinition)">
-      <summary>
-            Emits the instructions that will instantiate the current implementation.
-            </summary>
-      <param name="dependency">The dependency that describes the service to be instantiated.</param>
-      <param name="serviceMap">The service map that contains the list of dependencies in the application.</param>
-      <param name="targetMethod">The target method.</param>
     </member>
     <member name="T:Hiro.Interfaces.IStaticImplementation">
       <summary>
