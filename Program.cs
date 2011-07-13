@@ -9,9 +9,9 @@ namespace PaulBenchmark
         {
 #if DEBUG
             args = new[]
-					{   "t",
+					{   "m",
 						"c",
-						"50000",
+						"500000",
 						"r"
 					};
 #else
